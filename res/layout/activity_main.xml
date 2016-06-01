@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+	<Button
+        android:id="@+id/myButton"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/myEdit"
+        android:layout_alignBottom="@+id/myEdit"
+        android:layout_alignParentRight="true"
+        android:text="@string/ss" />
+    <EditText
+        android:id="@+id/myEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/myButton" />
+	<ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dip"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progress="50"
+        android:secondaryProgress="75"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/myEdit" />
+
+	<WebView
+	    android:id="@+id/webView1"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/progressBar1"  />
+
+</RelativeLayout>

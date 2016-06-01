@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="renderer" content="webkit"><meta name="keywords" content="快比价"><meta name="description" content="快比价"><meta name="x5-page-mode" content="app"><meta name="x5-orientation" content="portrait"><meta name="layoutmode" content="standard"><meta name="mobile-web-app-capable" content="yes"><meta name="browsermode" content="application"><meta name="screen-orientation" content="portrait"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-title" content="快比价"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon-precomposed" sizes="57x57" href="/icon-57.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/icon-72.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/icon-114.png"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/icon-144.png"><link rel="apple-touch-startup-image" href="/icon-1024748.png"><link rel="apple-touch-startup-image" sizes="2048x1496" href="/icon-20481496.png" media="screen and (min-device-width: 1025px) and (max-device-width: 2048px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)"><link rel="apple-touch-startup-image" sizes="1536x2008" href="/icon-15362008.png" media="screen and (min-device-width: 1025px) and (max-device-width: 2048px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)"><link rel="apple-touch-startup-image" sizes="1024x748" href="/icon-1024748.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)"><link rel="apple-touch-startup-image" sizes="768x1004" href="/icon-7681004.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"><link rel="apple-touch-startup-image" sizes="640x920" href="/icon-640920.png" media="screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)"><link rel="apple-touch-startup-image" sizes="320x460" href="/icon-320460.png" media="screen and (max-device-width: 320)"><link href="/favicon.ico" type="image/x-icon" rel="icon"><link href="/favicon.ico" type="image/x-icon" rel="shortcut icon"><title>首页</title>
+<style>
+.block{display:block;width:100%;}
+video{
+	display:block;width:100%;
+}
+</style>
+</head><body>
+<button id="btn" class="block">弹</button>
+<input type="file" accept="image/*;capture"/>
+<script>
+var oBtn = document.getElementById("btn");
+oBtn.onclick = function(){
+	alert("弹出框");
+}
+</script>
+<button id="btn2" class="block">callQQ773155801</button>
+<script>
+var oBtn = document.getElementById("btn2");
+oBtn.onclick = function(){
+	try{
+		BrowserInterface.callQQ("773155801");
+	}catch(e){
+		alert('callqq');
+	}
+}
+</script>
+<video src="http://player.youku.com/embed/XNTM5MTUwNDA0" controls="controls">
+您的浏览器不支持 video 标签。
+</video>
+</body></html>
