@@ -2,6 +2,9 @@ package com.example.android20160523;
 
 import java.io.File;
 
+import zhy.com.highlight.HighLight;
+import zhy.com.highlight.HighLight.MarginInfo;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,12 +54,37 @@ public class MainActivity extends Activity {
     public final static int FILECHOOSER_RESULTCODE = 1;
     public final static int FILECHOOSER_RESULTCODE_FOR_ANDROID_5 = 2;  
 	
-
+    //
+    private HighLight mHightLight;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.i("onCreate", "i");
+//		new HighLight(MainActivity.this)//
+//		.anchor(findViewById(R.id.myEdit))//
+//		.addHighLight(R.id.myButton, R.layout.info_up,  new HighLight.OnPosCallback() {
+//				@Override
+//				public void getPos(float rightMargin, float bottomMargin,
+//						RectF rectF, MarginInfo marginInfo) {
+//					// TODO Auto-generated method stub
+//					marginInfo.leftMargin = rectF.right - rectF.width() / 2;
+//		            marginInfo.topMargin = rectF.bottom;
+//				}
+//		    });//
+		
+		findViewById(R.id.myButton).post(
+                new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        showTipMask();
+                    }
+                }
+
+        );
+		
 		
 		context = getApplicationContext();
 		
@@ -143,19 +172,19 @@ public class MainActivity extends Activity {
 		sClient.loadUrl("file:///android_asset/index.html");
 		
 		sBtn.setOnClickListener(new OnClickListener(){
-
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String str = sText.getText().toString();
 				Log.i("onclick", str);
-//				if("vedio"==str){
+				if(str.compareTo("vedio") == 0){
 					sClient.loadUrl("http://player.youku.com/embed/XNTM5MTUwNDA0");
-//				} else if("file"==str){
-//					sClient.loadUrl("file:///android_asset/index.html");
-//				} else {
-//					sClient.loadUrl("http://"+str);
-//				}
+				} else if(str.compareTo("file") == 0){
+					sClient.loadUrl("file:///android_asset/index.html");
+				} else {
+					sClient.loadUrl("http://"+str);
+				}
 				
 			}
 			
@@ -236,6 +265,76 @@ public class MainActivity extends Activity {
             super.handleMessage(msg);
         }
     };
+    
+    
+    private void showTipMask()
+    {
+        mHightLight = new HighLight(MainActivity.this)//
+                .anchor(findViewById(R.id.content))//如果是Activity上增加引导层，不需要设置anchor
+//                .addHighLight(R.id.id_btn_important, R.layout.info_up,
+//                        new HighLight.OnPosCallback()
+//                        {
+//                            @Override
+//                            public void getPos(float rightMargin, float bottomMargin, RectF rectF, HighLight.MarginInfo marginInfo)
+//                            {
+//                                marginInfo.leftMargin = rectF.right - rectF.width() / 2;
+//                                marginInfo.topMargin = rectF.bottom;
+//                            }
+//                        })//
+//                .addHighLight(R.id.id_btn_amazing, R.layout.info_down, new HighLight.OnPosCallback()
+//                {
+//                    /**
+//                     * @param rightMargin 高亮view在anchor中的右边距
+//                     * @param bottomMargin 高亮view在anchor中的下边距
+//                     * @param rectF 高亮view的l,t,r,b,w,h都有
+//                     * @param marginInfo 设置你的布局的位置，一般设置l,t或者r,b
+//                     */
+//                    @Override
+//                    public void getPos(float rightMargin, float bottomMargin, RectF rectF, HighLight.MarginInfo marginInfo)
+//                    {
+//                        marginInfo.rightMargin = rightMargin + rectF.width() / 2;
+//                        marginInfo.bottomMargin = bottomMargin + rectF.height();
+//                    }
+//
+//                });
+        .addHighLight(R.id.myButton,R.layout.info_gravity_right_up, new HighLight.OnPosCallback(){
+
+
+            @Override
+            public void getPos(float rightMargin, float bottomMargin, RectF rectF, HighLight.MarginInfo marginInfo) {
+                marginInfo.rightMargin = rightMargin;
+                marginInfo.topMargin = rectF.top + rectF.height();
+            }
+        })
+        .addHighLight(R.id.myButton, R.layout.info_gravity_left_down, new HighLight.OnPosCallback() {
+
+
+            @Override
+            public void getPos(float rightMargin, float bottomMargin, RectF rectF, HighLight.MarginInfo marginInfo) {
+                marginInfo.leftMargin = rectF.right - rectF.width()/2;
+                marginInfo.bottomMargin = bottomMargin + rectF.height();
+            }
+        })
+        .setClickCallback(new HighLight.OnClickCallback() {
+            @Override
+            public void onClick() {
+                Toast.makeText(MainActivity.this,"clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mHightLight.show();
+    }
+
+
+    public void remove(View view)
+    {
+        mHightLight.remove();
+    }
+
+    public void add(View view)
+    {
+        mHightLight.show();
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
